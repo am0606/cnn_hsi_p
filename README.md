@@ -2,8 +2,8 @@
 
 ## Synopsis
 
-This is implementation of convolutional neural network for hyperspectral images
-classification by means of well-known keras framework. 
+This is implementation of 1D convolutional neural network for hyperspectral images
+classification by means of well-known `keras` and `torch` frameworks.
 
 This realization is related to cpp program developed by [eugnsp](https://github.com/eugnsp/cnn_hsi).
 
@@ -28,7 +28,7 @@ Trainable params: 38,017    |
 Non-trainable params: 0     |
 |
 
-There are also models with modifications to base:
+There are also keras models with modifications to base:
 
 
 model2 - dropout;
@@ -36,6 +36,7 @@ model2 - dropout;
 
 model3 - kernel regularization.
 
+The same model for torch is implemented.
 
 The gradient descent method was used for learning.
 
@@ -53,13 +54,15 @@ Data format for keras is row-wise: each row have `nbands` component representing
 
 ## How to run
 
-Python 3 enviroment with additional packages `keras` and `tensorflow` is required to run.
+Python 3 enviroment with additional packages `keras`, `pytorch` and `tensorflow` is required to run. 
+`logs` subdir should be created for working with `keras` implementation. `output` subdir should be created for both
+`keras` and `torch` implementations. 
 
 
 The program was tested with tensorflow 2.0 to use `keras-tuner` capability.
 
 
-The following parameters should be specified:
+The following parameters should be specified for `hsi_classifier_keras.py` and `hsi_classifier_torch.py`:
 
 
 
@@ -101,4 +104,3 @@ classification*.\
 ## License
 
 This code is distributed under GNU General Public License v3.0.
-# cnn_hsi_p

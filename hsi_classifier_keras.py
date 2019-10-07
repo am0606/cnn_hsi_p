@@ -6,7 +6,7 @@ import os
 
 from hsi_io import load_train,load_train_test,export_labels,save_train_history
 from variables import *
-from models import *
+from keras_models import *
 
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras import backend as K
@@ -154,18 +154,24 @@ if X_test_np.shape[0] > 0:
      print('Test accuracy:', score_test[1])
 
 preds_train = model.predict_proba(X_train_np)
+trainList0 = []
 trainList = []
-for p in preds_train:
+for i,p in enumerate(preds_train):
+     trainList0.append(np.argmax(y_train[i]))
      trainList.append(np.argmax(p))
 # add 'labels' column
+X_train['labels0'] = trainList0
 X_train['labels'] = trainList
 
 if X_test_np.shape[0] > 0:
      preds_test = model.predict_proba(X_test_np)
+     testList0 = []
      testList = []
-     for p in preds_test:
+     for i,p in enumerate(preds_test):
+          testList0.append(np.argmax(y_test[i]))
           testList.append(np.argmax(p))
      # add 'labels' column
+     X_test['labels0'] = testList0
      X_test['labels'] = testList
 
 if args.nosplit:
@@ -178,9 +184,7 @@ alldata.sort_index(inplace=True)
 
 print()
 print('X_train.shape = ',X_train.shape)
-print('X_train_np.shape = ',X_train_np.shape)
 print('X_test.shape = ',X_test.shape)
-print('X_test_np.shape = ',X_test_np.shape)
 print('zerodata.shape = ',zerodata.shape)
 print('alldata.shape = ',alldata.shape)
 print('num_classes = ',num_classes)
